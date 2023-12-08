@@ -1,0 +1,31 @@
+
+3. What is the output of the following code snippet
+
+public class Myclass {
+    static int a = 20;
+
+    static {
+        a++;
+    }
+
+    {
+        a++;
+        System.out.println(a);
+    }
+
+    public static void main(String[] args) {
+        Myclass obj = new Myclass();
+        Myclass obj2 = new Myclass();
+        Myclass obj3 = new Myclass();
+    }
+}
+
+
+=======================================================
+
+Each time when we create an instance, the instance block is executed and incrementing value of a by 1 and printing the current value of a.
+
+Output: 
+22
+23
+24
