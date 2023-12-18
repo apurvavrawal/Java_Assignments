@@ -9,8 +9,9 @@ public class TotalCountOfWords {
         String sentence = scanner.nextLine();
  
         scanner.close();
- 
-        Map<String, Integer> occurrences = countAllWordOccurrences(sentence);
+        
+ 	String str = sentence.toLowerCase();
+        Map<String, Integer> occurrences = countAllWordOccurrences(str);
   
         for (Map.Entry<String, Integer> entry : occurrences.entrySet()) {
             System.out.println(entry.getKey() + " : " + entry.getValue());
@@ -18,14 +19,13 @@ public class TotalCountOfWords {
     }
  
     private static Map<String, Integer> countAllWordOccurrences(String sentence) {
-     
+    	
         String[] words = sentence.split("\\s+");
  
         Map<String, Integer> wordOccurrences = new HashMap<>();
  
-        for (String word : words) { 
-            String str = word.toLowerCase();
-            wordOccurrences.put(str, wordOccurrences.getOrDefault(str, 0) + 1);
+        for (String word : words) {  
+            wordOccurrences.put(word, wordOccurrences.getOrDefault(word, 0) + 1);
         }
 
         return wordOccurrences;
