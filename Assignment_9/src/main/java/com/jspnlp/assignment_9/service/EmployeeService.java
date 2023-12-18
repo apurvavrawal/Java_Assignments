@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface EmployeeService {
 
-    List<Employee> getEmployees(String query);
+    List<Employee> getEmployees();
 }

@@ -16,7 +16,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> getEmployees(String query) {
+    public List<Employee> getEmployees() {
         List<Employee> employeeList = employeeRepository.getAllSalaryDetails();
         return employeeList;
     }

@@ -20,7 +20,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/salaryDetails")
-    public ResponseEntity<List<Employee>> getEmployeeDetails(@RequestParam("query") String query){
-        return ResponseEntity.ok(employeeService.getEmployees(query));
+    public ResponseEntity<List<Employee>> getEmployeeDetails(){
+        return ResponseEntity.ok(employeeService.getEmployees());
     }
 }
