@@ -7,6 +7,4 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
-    @Query(value = "SELECT * FROM EmployeeDetails",nativeQuery = true)
-    List<Employee> getAllSalaryDetails();
 }

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/employee")
+@RequestMapping("/employees")
 @PreAuthorize("hasRole('USER')")
 public class EmployeeController {
     @Autowired
