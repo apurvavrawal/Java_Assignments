@@ -1,11 +1,11 @@
 package com.josh.hotelmgmt.services;
 
-import com.josh.hotelmgmt.entities.FeedBack;
+import com.josh.hotelmgmt.entities.Feedback;
 
 import java.util.List;
 
 public interface FeedBackService {
-    List<FeedBack> getAllFeedback();
+    List<Feedback> getAllFeedback();
 
-    void submitFeedback(FeedBack feedBack);
+    void submitFeedback(Feedback feedBack);
 }

@@ -1,6 +1,6 @@
 package com.josh.hotelmgmt.controllers;
 
-import com.josh.hotelmgmt.entities.FeedBack;
+import com.josh.hotelmgmt.entities.Feedback;
 import com.josh.hotelmgmt.services.FeedBackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,12 +17,12 @@ public class FeedBackController {
 
     // Returns All Feedbacks
     @GetMapping("/")
-    public List<FeedBack> getAllFeedBacks(){
+    public List<Feedback> getAllFeedBacks(){
         return feedBackService.getAllFeedback();
     }
 
     @PostMapping("/")
-    public ResponseEntity<String> submitFeedback(@RequestBody FeedBack feedBack) {
+    public ResponseEntity<String> submitFeedback(@RequestBody Feedback feedBack) {
         feedBackService.submitFeedback(feedBack);
         return new ResponseEntity<>("Feedback submitted successfully !", HttpStatus.CREATED);
     }

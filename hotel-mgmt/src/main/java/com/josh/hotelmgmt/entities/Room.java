@@ -12,6 +12,7 @@ import lombok.*;
 @Table(name = "rooms")
 public class Room {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long roomId;
     private double pricePerDay;
 }

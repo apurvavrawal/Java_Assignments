@@ -2,9 +2,6 @@ package com.josh.hotelmgmt.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.Fetch;
-
-import java.util.List;
 
 @Getter
 @Setter
@@ -13,19 +10,19 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @Table(name = "food_orders")
-public class FoodOrders {
+public class FoodOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long token;
+    private long foodOrderId;
 
-    @OneToOne
-    @JoinColumn(name = "item_id")
+    @ManyToOne
+    @JoinColumn(name = "food_item_id")
     private FoodItem foodItemId;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "order_id")
     private Order orderId;
 
     private int quantity;
-    private Double total_price;
+    private double totalPrice;
 }

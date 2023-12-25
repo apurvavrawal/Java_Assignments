@@ -13,7 +13,7 @@ import lombok.*;
 public class FoodItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long itemId;
-    private String item;
-    private Double itemPrice;
+    private long foodItemId;
+    private String foodItem;
+    private double foodItemPrice;
 }

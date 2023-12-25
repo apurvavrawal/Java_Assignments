@@ -1,23 +1,17 @@
 package com.josh.hotelmgmt.services;
 
-import com.josh.hotelmgmt.customExceptions.RoomNotAvailableException;
 import com.josh.hotelmgmt.customExceptions.RoomNotFoundException;
+import com.josh.hotelmgmt.entities.Room;
 
-import com.josh.hotelmgmt.entities.RoomBooking;
-
-import java.time.LocalDateTime;
 import java.util.List;
 
 public interface RoomService {
-    void bookRoom(RoomBooking roomBooking) throws RoomNotAvailableException;
 
-    List<RoomBooking> getAllRooms();
+    List<Room> getAllRooms();
 
-    RoomBooking getRoomByBookingId(Long bookingId);
+    Room getRoomByRoomId(long roomId);
 
-    void deleteRoomBooking(Long bookingId) throws RoomNotFoundException;
+    void createNewRoom(Room room);
 
-   // boolean isRoomAvailable(Long bookingId, LocalDateTime startDate, LocalDateTime endDate);
-    boolean isRoomAvailable(Long roomId);
-
+    void deleteRoom(Long roomId) throws RoomNotFoundException;
 }
