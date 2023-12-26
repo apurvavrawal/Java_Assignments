@@ -2,6 +2,7 @@ package com.josh.hotelmgmt.services;
 
 import com.josh.hotelmgmt.customExceptions.FoodNotAvailableException;
 import com.josh.hotelmgmt.customExceptions.FoodOrderNotFoundException;
+import com.josh.hotelmgmt.dto.FoodOrderRequest;
 import com.josh.hotelmgmt.entities.FoodOrder;
 
 import java.util.List;
@@ -11,11 +12,11 @@ public interface FoodOrderService {
 
     FoodOrder getFoodOrderById(Long foodItemId);
 
-    boolean isFoodAvailableForOrder(Long foodItemId);
+    boolean isFoodAvailableForOrder(long foodItemId);
 
-    void placeFoodOrder(FoodOrder foodOrder) throws FoodNotAvailableException;
+    void placeFoodOrder(FoodOrderRequest foodOrderRequest) throws FoodNotAvailableException;
 
     void deleteFoodOrder(Long foodOrderId) throws FoodOrderNotFoundException;
 
-    void updateFoodOrder(Long foodOrderId, FoodOrder updatedFoodOrder);
+//    void updateFoodOrder(Long foodOrderId, FoodOrder updatedFoodOrder);
 }

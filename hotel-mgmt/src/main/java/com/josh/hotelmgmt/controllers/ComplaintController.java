@@ -22,7 +22,7 @@ public class ComplaintController {
     }
 
     // creates new complaint and saves into DB
-    @PostMapping()
+    @PostMapping("/")
     public ResponseEntity<String> submitComplaint(@RequestBody Complaint complaint) {
         complaintService.submitComplaint(complaint);
         return new ResponseEntity<>("Complaint submitted successfully", HttpStatus.CREATED);

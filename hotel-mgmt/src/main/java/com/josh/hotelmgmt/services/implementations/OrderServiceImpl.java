@@ -11,10 +11,7 @@ import com.josh.hotelmgmt.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -35,16 +32,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void createTotalFoodOrder(Order order) {
-        //create new order
-        Order newOrder = new Order();
-        double orderAmount = 0.0d;
-        Optional<FoodOrder> foodOrder = foodOrdersRepository.findById(order.getOrderId());
-        while(foodOrder.isEmpty()){
-            orderAmount = orderAmount+ foodOrder.get().getTotalPrice();
-        }
-        newOrder.setOrderTotal(orderAmount);
-        orderRepository.save(newOrder);
+    public long createOrder() {
+        Order order = new Order();
+        order.setOrderTotal(0);
+        orderRepository.save(order);
+        return order.getOrderId();
     }
 
     @Override
@@ -54,6 +46,23 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void deleteTotalOrder(Long orderId) throws OrderNotFoundException {
-        orderRepository.findById(orderId).orElseThrow(() -> new OrderNotFoundException("Order with order Id: "+ orderId + "not found"));
+        Order order = orderRepository.findById(orderId).orElseThrow(() -> new OrderNotFoundException("Order with order Id: "+ orderId + "not found"));
+        orderRepository.delete(order);
+    }
+
+    @Override
+    public void createTotalOrder(long orderId) {
+        //create new order
+        Order newOrder = orderRepository.findById(orderId).orElse(null);
+        double orderAmount = 0;
+        List<FoodOrder> foodOrders = foodOrdersRepository.findById(orderId).stream().toList();
+        Iterator<FoodOrder> foodOrderIterator = foodOrders.iterator();
+        while (foodOrderIterator.hasNext()){
+            orderAmount = orderAmount + foodOrderIterator.next().getTotalPrice();
+        }
+        orderAmount = foodOrders.stream().mapToDouble(FoodOrder::getTotalPrice).sum();
+        assert newOrder != null;
+        newOrder.setOrderTotal(orderAmount);
+        orderRepository.save(newOrder);
     }
 }

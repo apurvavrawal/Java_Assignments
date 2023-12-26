@@ -26,7 +26,7 @@ public class FoodServiceImpl implements FoodService {
     @Override
     public void createNewFoodEntry(FoodItem foodItem) {
         FoodItem food = new FoodItem();
-        food.setFoodItem(foodItem.getFoodItem());
+        food.setFoodItemName(foodItem.getFoodItemName());
         food.setFoodItemPrice(foodItem.getFoodItemPrice());
         foodItemsRepository.save(food);
     }

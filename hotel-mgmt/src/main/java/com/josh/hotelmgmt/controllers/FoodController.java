@@ -24,7 +24,7 @@ public class FoodController {
 
     // Returns food item by item id provided
     @GetMapping("/{foodItemId}")
-    public FoodItem getFoodItemById(long foodItemId){
+    public FoodItem getFoodItemById(@PathVariable long foodItemId){
         return foodService.getFoodItemById(foodItemId);
     }
 
@@ -36,7 +36,7 @@ public class FoodController {
     }
 
     @DeleteMapping("/{foodItemId}")
-    public void deleteFoodItem(long foodItemId) throws FoodNotAvailableException {
+    public void deleteFoodItem(@PathVariable long foodItemId) throws FoodNotAvailableException {
         foodService.deleteFoodItem(foodItemId);
     }
 

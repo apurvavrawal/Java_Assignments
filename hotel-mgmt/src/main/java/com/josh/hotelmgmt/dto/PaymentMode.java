@@ -1,5 +1,11 @@
-package com.josh.hotelmgmt.DTO;
+package com.josh.hotelmgmt.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@ToString
 public enum PaymentMode {
     DEBIT_CARD("Debit Card"),
     CASH("Cash"),
@@ -11,7 +17,4 @@ public enum PaymentMode {
         this.mode = mode;
     }
 
-    public String getMode() {
-        return mode;
-    }
 }

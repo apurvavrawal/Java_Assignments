@@ -23,7 +23,7 @@ public class RoomBooking {
 
     @ManyToOne
     @JoinColumn(name = "room_id")
-    private Room roomId;
+    private Room room;
 
     private long customerId;
     private LocalDateTime bookingStartTime;

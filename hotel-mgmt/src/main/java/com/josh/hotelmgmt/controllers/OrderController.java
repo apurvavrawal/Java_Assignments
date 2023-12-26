@@ -25,7 +25,7 @@ public class OrderController {
 
     // Returns Order by Order Id provided
     @GetMapping("/{orderId}")
-    public Order getOrderByOrderId(long orderId){
+    public Order getOrderByOrderId(@PathVariable long orderId){
         return orderService.getOrderByOrderId(orderId);
     }
 
@@ -40,13 +40,19 @@ public class OrderController {
         }
     }
 
-    // Creates new Order
+    // Creates new Order to generate OrderId
     @PostMapping("/")
-    public ResponseEntity<String> createTotalFoodOrder(@RequestBody Order order){
-            orderService.createTotalFoodOrder(order);
-            return new ResponseEntity<>("Total Food Order Placed successfully", HttpStatus.CREATED);
+    public ResponseEntity<String> createOrder(){
+            long orderId =  orderService.createOrder();
+            return new ResponseEntity<>("Order created successfully with orderId: " + orderId, HttpStatus.CREATED);
     }
 
+    // create new Order with food order details
+    @GetMapping("/orderamount/{orderId}")
+    public ResponseEntity<String> createTotalOrder(@PathVariable long orderId){
+        orderService.createTotalOrder(orderId);
+        return new ResponseEntity<>("Your Total Food Order is created successfully for orderId: "+ orderId,HttpStatus.CREATED);
+    }
     // Deletes the Order
     @DeleteMapping("/{orderId}")
     public ResponseEntity<String> deleteTotalOrder(@PathVariable Long orderId) {

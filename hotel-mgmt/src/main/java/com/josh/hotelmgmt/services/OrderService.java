@@ -11,9 +11,11 @@ public interface OrderService {
 
     Order getOrderByOrderId(long orderId);
 
-    void createTotalFoodOrder(Order order);
+    long createOrder();
 
     List<FoodOrder> getListOfDetailedFoodOrderByOrderId(Long orderId);
 
     void deleteTotalOrder(Long orderId) throws OrderNotFoundException;
+
+    void createTotalOrder(long orderId);
 }

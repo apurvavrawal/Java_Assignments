@@ -1,6 +1,5 @@
 package com.josh.hotelmgmt.controllers;
 
-import com.josh.hotelmgmt.customExceptions.RoomNotAvailableException;
 import com.josh.hotelmgmt.customExceptions.RoomNotFoundException;
 import com.josh.hotelmgmt.entities.Room;
 import com.josh.hotelmgmt.services.RoomService;
@@ -25,11 +24,16 @@ public class RoomController {
 
     // Provides details based on roomId
     @GetMapping("/{roomId}")
-    public Room getRoomByRoomId(long roomId){
+    public Room getRoomByRoomId(@PathVariable long roomId){
         return roomService.getRoomByRoomId(roomId);
     }
 
     // Create new Room
+    /**
+     *
+     * @param room
+     * @return
+     */
     @PostMapping("/")
     public ResponseEntity<String> createNewRoom(@RequestBody Room room){
         roomService.createNewRoom(room);
@@ -37,6 +41,11 @@ public class RoomController {
     }
 
     // Delete Room based on Room Number
+    /**
+     *
+     * @param roomId
+     * @return
+     */
     @DeleteMapping("/{roomId}")
     public ResponseEntity<String> deleteRoom(@PathVariable Long roomId) {
         try {

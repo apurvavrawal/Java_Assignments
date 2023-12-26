@@ -2,6 +2,7 @@ package com.josh.hotelmgmt.controllers;
 
 import com.josh.hotelmgmt.customExceptions.FoodNotAvailableException;
 import com.josh.hotelmgmt.customExceptions.FoodOrderNotFoundException;
+import com.josh.hotelmgmt.dto.FoodOrderRequest;
 import com.josh.hotelmgmt.entities.FoodOrder;
 import com.josh.hotelmgmt.services.FoodOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/foodOrders")
+@RequestMapping("/foodorders")
 public class FoodOrderController {
     @Autowired
     private FoodOrderService foodOrderService;
@@ -37,21 +38,15 @@ public class FoodOrderController {
 
     // Creates new food order
     @PostMapping("/")
-    public ResponseEntity<String> createFoodOrder(@RequestBody FoodOrder foodOrder ){
+    public ResponseEntity<String> createFoodOrder(@RequestBody FoodOrderRequest foodOrderRequest ){
         try {
-            foodOrderService.placeFoodOrder(foodOrder);
+            foodOrderService.placeFoodOrder(foodOrderRequest);
             return new ResponseEntity<>("Food Ordered successfully", HttpStatus.CREATED);
         } catch (FoodNotAvailableException e) {
             return new ResponseEntity<>("Requested Food is not available for placing Order", HttpStatus.BAD_REQUEST);
         }
     }
 
-    // Update the food Order based on Food Order ID
-    @PutMapping("/{foodOrderId}")
-    public ResponseEntity<String> updateFoodOrder(@PathVariable Long foodOrderId, @RequestBody FoodOrder updatedFoodOrder){
-        foodOrderService.updateFoodOrder(foodOrderId, updatedFoodOrder);
-        return new ResponseEntity<>("Food Order is updated successfully", HttpStatus.OK);
-    }
     // Deletes food order based on Food OrderID
     @DeleteMapping("/{foodOrderId}")
     public ResponseEntity<String> deleteFoodOrder(@PathVariable Long foodOrderId) {

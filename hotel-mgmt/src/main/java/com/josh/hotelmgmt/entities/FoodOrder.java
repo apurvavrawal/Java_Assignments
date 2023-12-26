@@ -17,11 +17,11 @@ public class FoodOrder {
 
     @ManyToOne
     @JoinColumn(name = "food_item_id")
-    private FoodItem foodItemId;
+    private FoodItem foodItem;
 
     @ManyToOne
     @JoinColumn(name = "order_id")
-    private Order orderId;
+    private Order order;
 
     private int quantity;
     private double totalPrice;

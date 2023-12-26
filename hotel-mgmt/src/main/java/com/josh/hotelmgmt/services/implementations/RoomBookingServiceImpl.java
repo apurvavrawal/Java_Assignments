@@ -2,6 +2,7 @@ package com.josh.hotelmgmt.services.implementations;
 
 import com.josh.hotelmgmt.customExceptions.RoomNotAvailableException;
 import com.josh.hotelmgmt.customExceptions.RoomNotFoundException;
+import com.josh.hotelmgmt.dto.RoomBookingRequest;
 import com.josh.hotelmgmt.entities.Room;
 import com.josh.hotelmgmt.entities.RoomBooking;
 import com.josh.hotelmgmt.repositories.RoomBookingRepository;
@@ -35,22 +36,23 @@ public class RoomBookingServiceImpl implements RoomBookingService {
     }
 
     @Override
-    public void bookRoom(RoomBooking roomBooking) throws RoomNotAvailableException {
+    public void bookRoom(RoomBookingRequest roomBookingRequest) throws RoomNotAvailableException {
 
         // check if room is available for booking
 
         /*if(!isRoomAvailable(roomBooking.getBookingId(), roomBooking.getBookingStartTime(), roomBooking.getBookingEndTime())){
             throw new RoomNotAvailableException("Room is not available for booking");
         }*/
-        if(! isRoomAvailable(roomBooking.getRoomId().getRoomId())){
-            throw new RoomNotAvailableException("Room is not available for booking with Room Number: " + roomBooking.getRoomId());
+        if( ! isRoomAvailable(roomBookingRequest.getRoomId())){
+            throw new RoomNotAvailableException("Room is not available for booking with Room Number: " + roomBookingRequest.getRoomId());
         }
         //save the new booking for Room
 
         RoomBooking roomBook =  new RoomBooking();
-        Optional<Room> room = roomRepository.findById(roomBooking.getRoomId().getRoomId());
-        long daysBetween = Duration.between(roomBook.getBookingStartTime(), roomBooking.getBookingEndTime()).toDays();
-        roomBook.setCustomerId(roomBooking.getCustomerId());
+        Optional<Room> room = roomRepository.findById(roomBookingRequest.getRoomId());
+        long daysBetween = Duration.between(roomBookingRequest.getBookingStartTime(), roomBookingRequest.getBookingEndTime()).toDays();
+        roomBook.setRoom(room.get());
+        roomBook.setCustomerId(roomBookingRequest.getCustomerId());
         roomBook.setBookingStartTime(LocalDateTime.now());
         roomBook.setBookingEndTime(LocalDateTime.now().plusDays(1));
         roomBook.setBooked(true);
@@ -73,8 +75,9 @@ public class RoomBookingServiceImpl implements RoomBookingService {
     }*/
 
     @Override
-    public boolean isRoomAvailable(Long roomId){
-        long availableCount = roomRepository.countByRoomId(roomId);
-        return availableCount > 0;
+    public boolean isRoomAvailable(long roomId){
+        Optional<RoomBooking> roomBooking = roomBookingRepository.findById(roomId);
+
+        return roomBooking.isEmpty() || !roomBooking.get().isBooked();
     }
 }

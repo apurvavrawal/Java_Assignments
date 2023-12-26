@@ -39,7 +39,7 @@ AND 2023-01-05 10:00:00.000000 <= rb.booking_end_time;
 /* create master table food_items */
 CREATE TABLE food_items (
 	food_item_id BIGINT PRIMARY KEY, 
-	food_item VARCHAR(50), 
+	food_item_name VARCHAR(50),
 	food_item_price DOUBLE NOT NULL);
 
 

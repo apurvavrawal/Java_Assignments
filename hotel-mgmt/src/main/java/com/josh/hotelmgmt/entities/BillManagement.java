@@ -1,6 +1,6 @@
 package com.josh.hotelmgmt.entities;
 
-import com.josh.hotelmgmt.DTO.PaymentMode;
+import com.josh.hotelmgmt.dto.PaymentMode;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,7 +20,7 @@ public class BillManagement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long billId;
 
-    @ManyToOne
+    @OneToOne
     private RoomBooking roomBooking;
 
     @OneToOne

@@ -1,5 +1,6 @@
 package com.josh.hotelmgmt.controllers;
 
+import com.josh.hotelmgmt.dto.BillManagementRequest;
 import com.josh.hotelmgmt.entities.BillManagement;
 import com.josh.hotelmgmt.services.BillManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,19 +34,9 @@ public class BillManagementController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<BillManagement> createBill(@RequestBody BillManagement bill) {
-        BillManagement createdBill = billManagementService.createBill(bill);
+    public ResponseEntity<BillManagement> createBill(@RequestBody BillManagementRequest billManagementRequest) {
+        BillManagement createdBill = billManagementService.createBill(billManagementRequest);
         return new ResponseEntity<>(createdBill, HttpStatus.CREATED);
-    }
-
-    @PutMapping("/{billId}")
-    public ResponseEntity<BillManagement> updateBill(@PathVariable Long billId, @RequestBody BillManagement bill) {
-        BillManagement updatedBill = billManagementService.updateBill(billId, bill);
-        if (updatedBill != null) {
-            return new ResponseEntity<>(updatedBill, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
     }
 
     @DeleteMapping("/{billId}")

@@ -2,6 +2,7 @@ package com.josh.hotelmgmt.controllers;
 
 import com.josh.hotelmgmt.customExceptions.RoomNotAvailableException;
 import com.josh.hotelmgmt.customExceptions.RoomNotFoundException;
+import com.josh.hotelmgmt.dto.RoomBookingRequest;
 import com.josh.hotelmgmt.entities.RoomBooking;
 import com.josh.hotelmgmt.services.RoomBookingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/roomBookings")
+@RequestMapping("/roombookings")
 public class RoomBookingController {
 
     @Autowired
@@ -38,9 +39,9 @@ public class RoomBookingController {
 
     // Creates request for Room booking
     @PostMapping("/")
-    public ResponseEntity<String> bookRoom(@RequestBody RoomBooking roomBooking) {
+    public ResponseEntity<String> bookRoom(@RequestBody RoomBookingRequest roomBookingRequest) {
         try {
-            roomBookingService.bookRoom(roomBooking);
+            roomBookingService.bookRoom(roomBookingRequest);
             return new ResponseEntity<>("Room booked successfully", HttpStatus.CREATED);
         } catch (RoomNotAvailableException e) {
             return new ResponseEntity<>("Room is not available for booking", HttpStatus.BAD_REQUEST);
@@ -70,8 +71,7 @@ public class RoomBookingController {
             return new ResponseEntity<>("Room is not available for the mentioned date range", HttpStatus.BAD_REQUEST);
         }
     }*/
-
-    public ResponseEntity<String> checkRoomAvailability(@RequestParam Long roomId){
+    public ResponseEntity<String> checkRoomAvailability(@PathVariable long roomId){
         if(roomBookingService.isRoomAvailable(roomId)){
             return new ResponseEntity<>("Room is available for booking", HttpStatus.OK);
         } else {
