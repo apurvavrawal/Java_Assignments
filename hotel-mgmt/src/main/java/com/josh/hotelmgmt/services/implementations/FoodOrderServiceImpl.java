@@ -54,7 +54,7 @@ public class FoodOrderServiceImpl implements FoodOrderService {
 
     @Override
     public void deleteFoodOrder(Long foodOrderId) throws FoodOrderNotFoundException {
-        FoodOrder foodOrder = foodOrdersRepository.findById(foodOrderId).orElseThrow(() -> new FoodOrderNotFoundException("Food Order with token"+ foodOrderId + "not available"));
+        FoodOrder foodOrder = foodOrdersRepository.findById(foodOrderId).orElseThrow(() -> new FoodOrderNotFoundException("Food Order with foodOrderId: "+ foodOrderId + " not available"));
         foodOrdersRepository.delete(foodOrder);
     }
 

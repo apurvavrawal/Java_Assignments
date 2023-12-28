@@ -49,12 +49,12 @@ public class FoodOrderController {
 
     // Deletes food order based on Food OrderID
     @DeleteMapping("/{foodOrderId}")
-    public ResponseEntity<String> deleteFoodOrder(@PathVariable Long foodOrderId) {
+    public ResponseEntity<String> deleteFoodOrder(@PathVariable Long foodOrderId) throws FoodOrderNotFoundException{
         try {
             foodOrderService.deleteFoodOrder(foodOrderId);
             return new ResponseEntity<>("Food Order is deleted successfully", HttpStatus.OK);
         } catch (FoodOrderNotFoundException e) {
-            return new ResponseEntity<>("Order is not found for provided Food Order Id", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Food Order with foodOrderId: " +foodOrderId + " not available", HttpStatus.NOT_FOUND);
         }
     }
     // checks food availability for provided Food Order

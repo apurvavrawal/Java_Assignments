@@ -33,7 +33,7 @@ public class FoodServiceImpl implements FoodService {
 
     @Override
     public void deleteFoodItem(long foodItemId) throws FoodNotAvailableException {
-        FoodItem foodItem = foodItemsRepository.findById(foodItemId).orElseThrow(()-> new FoodNotAvailableException("Food Item with Id: "+ foodItemId + "is not available"));
+        FoodItem foodItem = foodItemsRepository.findById(foodItemId).orElseThrow(()-> new FoodNotAvailableException("Food Item with Id: "+ foodItemId + " is not available"));
         foodItemsRepository.delete(foodItem);
     }
 

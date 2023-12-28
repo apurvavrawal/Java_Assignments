@@ -38,11 +38,6 @@ public class RoomBookingServiceImpl implements RoomBookingService {
     @Override
     public void bookRoom(RoomBookingRequest roomBookingRequest) throws RoomNotAvailableException {
 
-        // check if room is available for booking
-
-        /*if(!isRoomAvailable(roomBooking.getBookingId(), roomBooking.getBookingStartTime(), roomBooking.getBookingEndTime())){
-            throw new RoomNotAvailableException("Room is not available for booking");
-        }*/
         if( ! isRoomAvailable(roomBookingRequest.getRoomId())){
             throw new RoomNotAvailableException("Room is not available for booking with Room Number: " + roomBookingRequest.getRoomId());
         }
@@ -65,15 +60,6 @@ public class RoomBookingServiceImpl implements RoomBookingService {
         RoomBooking roomBooking = roomBookingRepository.findById(bookingId).orElseThrow(() -> new RoomNotFoundException("Room not Found for Room Number: "+ bookingId ));
         roomBookingRepository.delete(roomBooking);
     }
-
-   /* @Override
-    public boolean isRoomAvailable(Long bookingId, LocalDateTime startDate, LocalDateTime endDate) {
-        long bookings = roomBookingRepository.roomAvailability(bookingId, startDate, endDate);
-        if(Objects.isNull(bookings))
-            return false;
-        return true;
-    }*/
-
     @Override
     public boolean isRoomAvailable(long roomId){
         Optional<RoomBooking> roomBooking = roomBookingRepository.findById(roomId);
